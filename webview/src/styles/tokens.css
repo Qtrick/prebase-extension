@@ -1,0 +1,52 @@
+/**
+ * PreBase design tokens.
+ * Prefer VS Code theme variables; fall back to UI/UX Pro Max PreBase palette.
+ * See design-system/prebase/MASTER.md
+ */
+
+:root {
+  --pb-bg: var(--vscode-editor-background, #0f172a);
+  --pb-fg: var(--vscode-editor-foreground, #f8fafc);
+  --pb-muted: var(--vscode-descriptionForeground, #94a3b8);
+  --pb-surface: var(--vscode-sideBar-background, #1b2336);
+  --pb-surface-elevated: var(--vscode-editorWidget-background, #1e293b);
+  --pb-border: var(--vscode-panel-border, #475569);
+  --pb-accent: var(--vscode-button-background, #22c55e);
+  --pb-accent-fg: var(--vscode-button-foreground, #0f172a);
+  --pb-focus: var(--vscode-focusBorder, #ffffff);
+  --pb-error: var(--vscode-errorForeground, #ef4444);
+  --pb-warning: var(--vscode-editorWarning-foreground, #f59e0b);
+  --pb-selection: var(--vscode-list-activeSelectionBackground, #334155);
+  --pb-hover: var(--vscode-list-hoverBackground, #272f42);
+
+  --pb-font-body: var(--vscode-font-family, 'IBM Plex Sans', system-ui, sans-serif);
+  --pb-font-mono: var(--vscode-editor-font-family, 'JetBrains Mono', ui-monospace, monospace);
+
+  --space-xs: 2px;
+  --space-sm: 4px;
+  --space-md: 8px;
+  --space-lg: 12px;
+  --space-xl: 16px;
+  --space-2xl: 24px;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --motion-fast: 150ms;
+  --motion-normal: 220ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --node-module: #38bdf8;
+  --node-file: #a78bfa;
+  --node-function: #34d399;
+  --node-component: #fbbf24;
+  --node-service: #fb7185;
+  --node-folder: #94a3b8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-normal: 0ms;
+  }
+}

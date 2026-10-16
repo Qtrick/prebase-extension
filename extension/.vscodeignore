@@ -1,0 +1,25 @@
+# Deny-all allowlist: monorepo layouts otherwise leak ../ into the VSIX via vsce.
+**/*
+../**
+
+# Runtime assets only
+!package.json
+!LICENSE.txt
+!NOTICE.md
+!readme.md
+!out/
+!out/**
+!media/
+!media/**
+!bin/
+!bin/**
+
+# Never ship build intermediates even if present under out/
+out/**/*.map
+out/**/*.d.ts
+out/**/*.test.js
+**/*.map
+**/*.d.ts
+**/*.test.js
+**/*.ts
+**/*.tsx

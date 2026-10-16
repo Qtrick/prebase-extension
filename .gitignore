@@ -1,0 +1,11 @@
+node_modules/
+target/
+extension/out/
+extension/bin/
+extension/media/
+*.vsix
+.DS_Store
+dist/
+coverage/
+*.log
+.turbo/

@@ -1,0 +1,65 @@
+{
+  "name": "prebase",
+  "displayName": "PreBase",
+  "description": "Codebase architecture Network Graph and Temporal Graph for VS Code",
+  "version": "0.1.0",
+  "publisher": "prebase",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:prebase.open",
+    "onWebviewPanel:prebase.graph"
+  ],
+  "main": "./out/extension/src/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true,
+      "description": "PreBase only reads source files and Git objects locally. It does not execute repository code or modify Git state."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "PreBase requires a local filesystem folder for analysis."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "prebase.open",
+        "title": "Open PreBase",
+        "category": "PreBase"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "prebase.open"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json -w",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "package": "vsce package --no-dependencies --allow-missing-repository",
+    "inspect-vsix": "node ../scripts/inspect-vsix.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.93.0",
+    "@vscode/vsce": "^3.9.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "extensionKind": [
+    "workspace"
+  ]
+}

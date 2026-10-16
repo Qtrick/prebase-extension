@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  build-test-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Rust fmt
+        run: cargo fmt -p prebase-engine -- --check
+
+      - name: Rust clippy
+        run: cargo clippy -p prebase-engine -- -D warnings
+
+      - name: Rust tests
+        run: npm run test:rust
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Extension + webview tests
+        run: npm run test:extension && npm run test:webview
+
+      - name: Production build + VSIX
+        run: npm run package
+
+      - name: Upload VSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebase-vsix
+          path: extension/*.vsix
+          if-no-files-found: error

@@ -1,0 +1,31 @@
+{
+  "name": "prebase-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PreBase: codebase architecture Network and Temporal graphs for VS Code",
+  "workspaces": [
+    "extension",
+    "webview",
+    "shared/protocol"
+  ],
+  "scripts": {
+    "build": "npm run build:engine && npm run build:webview && npm run build:extension",
+    "build:engine": "CARGO_TARGET_DIR=target cargo build --release -p prebase-engine && node scripts/copy-engine.mjs",
+    "build:engine:debug": "CARGO_TARGET_DIR=target cargo build -p prebase-engine && node scripts/copy-engine.mjs --debug",
+    "build:webview": "npm run build -w webview",
+    "build:extension": "npm run build -w extension",
+    "test": "npm run test:rust && npm run test:extension && npm run test:webview",
+    "test:rust": "CARGO_TARGET_DIR=target cargo test -p prebase-engine",
+    "test:extension": "npm run test -w extension",
+    "test:webview": "npm run test -w webview",
+    "typecheck": "npm run typecheck -w extension && npm run typecheck -w webview",
+    "watch:webview": "npm run watch -w webview",
+    "package": "npm run build && npm run package -w extension && npm run inspect-vsix",
+    "inspect-vsix": "node scripts/inspect-vsix.mjs",
+    "audit:deps": "npm audit --omit=dev || true",
+    "ci": "npm run typecheck && npm run test && npm run package"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
